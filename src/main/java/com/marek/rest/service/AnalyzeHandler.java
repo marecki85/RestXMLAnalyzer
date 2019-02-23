@@ -16,28 +16,28 @@ public class AnalyzeHandler extends DefaultHandler {
 	private Consumer<Row> rowConsumer;
 	private Row row = null;
 
-	public AnalyzeHandler(Consumer<Row> rowConsumer) {
+	AnalyzeHandler(Consumer<Row> rowConsumer) {
 		super();
 		this.rowConsumer = rowConsumer;
 	}
 
 	@Override
-	public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException {
+	public void startElement(String uri, String localName, String qName, Attributes attributes){
 		if (qName.equals(Constants.ROW)) {
-			row = new Row();
-			row.setId(parseIfNotNull(attributes, Constants.ID));
-			row.setPostTypeId(parseIfNotNull(attributes, Constants.POST_TYPE_ID));
-			row.setAcceptedAnswerId(parseIfNotNull(attributes, Constants.ACCEPTED_ANSWER_ID));
-			row.setCreationDate(parseDate(attributes.getValue(Constants.CREATION_DATE)));
-			row.setScore(parseIfNotNull(attributes, Constants.SCORE));
-			row.setViewCount(parseIfNotNull(attributes, Constants.VIEW_COUNT));
-			row.setBody(attributes.getValue(Constants.BODY));
-			row.setOwnerUserId(parseIfNotNull(attributes, Constants.OWNER_USER_ID));
-			row.setLastActivityDate(parseDate(attributes.getValue(Constants.LAST_ACTIVITY_DATE)));
-			row.setTitle(attributes.getValue(Constants.TITLE));
-			row.setTags(attributes.getValue(Constants.TAGS));
-			row.setAnswerCount(parseIfNotNull(attributes, Constants.ANSWER_COUNT));
-			row.setCommentCount(parseIfNotNull(attributes, Constants.COMMENT_COUNT));
+			row = Row.builder()
+					.id(parseIfNotNull(attributes, Constants.ID))
+					.PostTypeId(parseIfNotNull(attributes, Constants.POST_TYPE_ID))
+					.AcceptedAnswerId(parseIfNotNull(attributes, Constants.ACCEPTED_ANSWER_ID))
+					.CreationDate(parseDate(attributes.getValue(Constants.CREATION_DATE)))
+					.Score(parseIfNotNull(attributes, Constants.SCORE))
+					.ViewCount(parseIfNotNull(attributes, Constants.VIEW_COUNT))
+					.Body(attributes.getValue(Constants.BODY))
+					.OwnerUserId(parseIfNotNull(attributes, Constants.OWNER_USER_ID))
+					.LastActivityDate(parseDate(attributes.getValue(Constants.LAST_ACTIVITY_DATE)))
+					.title(attributes.getValue(Constants.TITLE))
+					.Tags(attributes.getValue(Constants.TAGS))
+					.AnswerCount(parseIfNotNull(attributes, Constants.ANSWER_COUNT))
+					.CommentCount(parseIfNotNull(attributes, Constants.COMMENT_COUNT)).build();
 		}
 	}
 
@@ -58,7 +58,7 @@ public class AnalyzeHandler extends DefaultHandler {
 	}
 
 	private static Integer parseIfNotNull(Attributes attributes, String key) {
-		Integer result = null;
+		Integer result;
 		result = attributes.getValue(key) == null ? null : Integer.parseInt(attributes.getValue(key));
 		return result;
 	}

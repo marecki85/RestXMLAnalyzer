@@ -19,10 +19,14 @@ import com.marek.rest.service.XMLNotFoundException;
 @RestController
 public class RestAnalyzer {
 
-	@Autowired
-	private AnalyzerService analyzerService;
+	private final AnalyzerService analyzerService;
 
-	@RequestMapping(value = "/analyze", method = RequestMethod.POST)
+    @Autowired
+    public RestAnalyzer(AnalyzerService analyzerService) {
+        this.analyzerService = analyzerService;
+    }
+
+    @RequestMapping(value = "/analyze", method = RequestMethod.POST)
 	@GetMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public AnalyzedContent getStandardAnalyzedContent(@RequestBody Request request) {
 		return analyzerService.getAnalyzedContent(request.getUrl());

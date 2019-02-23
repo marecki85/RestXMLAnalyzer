@@ -3,6 +3,9 @@ package com.marek.rest.entity;
 import java.time.LocalDateTime;
 import java.util.Map;
 
+import lombok.Getter;
+
+@Getter
 public class AnalyzedContent {
 
 	private LocalDateTime analyseDate;
@@ -12,13 +15,5 @@ public class AnalyzedContent {
 		super();
 		this.analyseDate = analyseDate;
 		this.details = details;
-	}
-
-	public Map<String, Object> getDetails() {
-		return details;
-	}
-
-	public LocalDateTime getAnalyseDate() {
-		return analyseDate;
 	}
 }

@@ -7,34 +7,32 @@ import java.util.Map;
 import com.marek.rest.entity.Row;
 import com.marek.rest.util.Constants;
 
-public class AnalyzerStats {
+class AnalyzerStats {
 
 	private final Map<String, Object> analyzedAttributes = new LinkedHashMap<>();
 
 	private LocalDateTime minDate;
 	private LocalDateTime maxDate;
-	private int scoreSum = 0;
-	private int scoreNumber = 0;
+	private int scoreSum;
+	private int scoreNumber;
 
-	public void updateNumberOfTotalPosts(Row row) {
+	void updateNumberOfTotalPosts(Row row) {
 		Integer count = row.getId();
-		Long currentCount = 0L;
 		if (count != null) {
-			currentCount = (Long) getAnalyzedAttributes().getOrDefault(Constants.TOTAL_POSTS, 0L) + 1;
+			long currentCount = (Long) getAnalyzedAttributes().getOrDefault(Constants.TOTAL_POSTS, 0L) + 1;
 			getAnalyzedAttributes().put(Constants.TOTAL_POSTS, currentCount);
 		}
 	}
 
-	public void updateNumberOfTotalAcceptedPosts(Row row) {
+	void updateNumberOfTotalAcceptedPosts(Row row) {
 		Integer count = row.getAcceptedAnswerId();
-		Long currentCount = 0L;
 		if (count != null) {
-			currentCount = (Long) getAnalyzedAttributes().getOrDefault(Constants.TOTAL_ACCEPTED_POSTS, 0L) + 1;
+			long currentCount = (Long) getAnalyzedAttributes().getOrDefault(Constants.TOTAL_ACCEPTED_POSTS, 0L) + 1;
 			getAnalyzedAttributes().put(Constants.TOTAL_ACCEPTED_POSTS, currentCount);
 		}
 	}
 
-	public void updateFirstPost(Row row) {
+	void updateFirstPost(Row row) {
 		LocalDateTime currentDate = row.getCreationDate();
 		if (maxDate == null || currentDate != null && currentDate.isBefore(maxDate)) {
 			maxDate = currentDate;
@@ -42,7 +40,7 @@ public class AnalyzerStats {
 		}
 	}
 
-	public void updateLastPost(Row row) {
+	void updateLastPost(Row row) {
 		LocalDateTime currentDate = row.getCreationDate();
 		if (minDate == null || currentDate != null && currentDate.isAfter(minDate)) {
 			minDate = currentDate;
@@ -50,7 +48,7 @@ public class AnalyzerStats {
 		}
 	}
 
-	public void updateAverageScore(Row row) {
+	void updateAverageScore(Row row) {
 		Integer currentScore = row.getScore();
 		if (currentScore != null) {
 			scoreSum += currentScore;
@@ -59,7 +57,7 @@ public class AnalyzerStats {
 		}
 	}
 
-	public Map<String, Object> getAnalyzedAttributes() {
+	Map<String, Object> getAnalyzedAttributes() {
 		return analyzedAttributes;
 	}
 

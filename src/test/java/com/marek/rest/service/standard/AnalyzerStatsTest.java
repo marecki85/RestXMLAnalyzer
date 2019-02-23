@@ -99,7 +99,6 @@ public class AnalyzerStatsTest {
 		analyzerStats.updateNumberOfTotalAcceptedPosts(row2());
 		analyzerStats.updateNumberOfTotalAcceptedPosts(row3());
 		analyzerStats.updateNumberOfTotalAcceptedPosts(row4());
-		;
 		assertEquals(3L, analyzerStats.getAnalyzedAttributes().get(Constants.TOTAL_ACCEPTED_POSTS));
 	}
 
@@ -131,43 +130,22 @@ public class AnalyzerStatsTest {
 	}
 
 	private Row row1() {
-		final Row row1 = new Row();
-		row1.setId(1);
-		row1.setPostTypeId(2);
-		row1.setAcceptedAnswerId(4);
-		row1.setCreationDate(LocalDateTime.of(2018, 12, 13, 12, 31));
-		row1.setScore(50);
-		row1.setViewCount(1000);
-		row1.setBody("body");
-		row1.setOwnerUserId(22);
-		row1.setLastActivityDate(LocalDateTime.of(2014, 12, 13, 12, 30));
-		row1.setTitle("title");
-		row1.setTags("<TAGS>");
-		row1.setAnswerCount(3);
-		row1.setCommentCount(2);
-		return row1;
+		return Row.builder().id(1).PostTypeId(2).AcceptedAnswerId(4)
+				.CreationDate(LocalDateTime.of(2018, 12, 13, 12, 31)).Score(50).ViewCount(1000).OwnerUserId(22)
+				.LastActivityDate(LocalDateTime.of(2014, 12, 13, 12, 30)).title("title").Tags("<TAGS>").AnswerCount(3)
+				.CommentCount(2).build();
 	}
 
 	private Row row2() {
-		final Row row2 = new Row();
-		row2.setId(2);
-		row2.setAcceptedAnswerId(4);
-		row2.setCreationDate(LocalDateTime.of(1999, 12, 22, 12, 30));
-		row2.setScore(100);
-		return row2;
+		return Row.builder().id(2).AcceptedAnswerId(4).CreationDate(LocalDateTime.of(1999, 12, 22, 12, 30))
+				.Score(100).build();
 	}
 
 	private Row row3() {
-		final Row row3 = new Row();
-		row3.setId(3);
-		row3.setAcceptedAnswerId(88);
-		row3.setScore(30);
-		return row3;
+		return Row.builder().id(3).AcceptedAnswerId(88).Score(30).build();
 	}
 
 	private Row row4() {
-		final Row row4 = new Row();
-		row4.setCreationDate(LocalDateTime.of(1833, 12, 13, 12, 30));
-		return row4;
+		return Row.builder().CreationDate(LocalDateTime.of(1833, 12, 13, 12, 30)).build();
 	}
 }
