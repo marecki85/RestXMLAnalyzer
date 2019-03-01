@@ -65,14 +65,14 @@ public class AnalyzerStatsTest {
 	}
 
 	@Test
-	public void updatelastPostInOneRowTest() {
+	public void updateLastPostInOneRowTest() {
 		analyzerStats.updateLastPost(row2());
 		assertEquals(LocalDateTime.of(1999, 12, 22, 12, 30),
 				analyzerStats.getAnalyzedAttributes().get(Constants.LAST_POST));
 	}
 
 	@Test
-	public void updatelastPostInManyRowsTest() {
+	public void updateLastPostInManyRowsTest() {
 		analyzerStats.updateLastPost(row1());
 		analyzerStats.updateLastPost(row2());
 		analyzerStats.updateLastPost(row3());
@@ -82,7 +82,7 @@ public class AnalyzerStatsTest {
 	}
 
 	@Test
-	public void updatelastPostInOneRowWithNoAttributeTest() {
+	public void updateLastPostInOneRowWithNoAttributeTest() {
 		analyzerStats.updateLastPost(row3());
 		assertNull(analyzerStats.getAnalyzedAttributes().get(Constants.LAST_POST));
 	}

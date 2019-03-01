@@ -16,14 +16,11 @@ import com.marek.rest.entity.Row;
 public class RowXMLParser {
 
 	public void parse(String url, Consumer<Row> rowConsumer) {
-
 		AnalyzeHandler analyzeHandler = new AnalyzeHandler(rowConsumer);
 		SAXParserFactory factory = SAXParserFactory.newInstance();
 		try {
 			SAXParser saxParser = factory.newSAXParser();
-
 			saxParser.parse(url, analyzeHandler);
-
 		} catch (IOException e) {
 			throw new XMLNotFoundException();
 		} catch (SAXException | ParserConfigurationException e) {

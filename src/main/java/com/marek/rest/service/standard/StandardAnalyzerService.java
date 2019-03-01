@@ -12,14 +12,18 @@ import com.marek.rest.service.RowXMLParser;
 @Service
 public class StandardAnalyzerService implements AnalyzerService {
 
+	private final RowXMLParser rowXMLparser;
+
 	@Autowired
-	RowXMLParser rowXMLparser;
+	public StandardAnalyzerService(RowXMLParser rowXMLparser) {
+		this.rowXMLparser = rowXMLparser;
+	}
 
 	@Override
 	public AnalyzedContent getAnalyzedContent(String url) {
 		final AnalyzerStats analyzerStats = new AnalyzerStats();
 
-		rowXMLparser.parse(url, (row) -> {
+		rowXMLparser.parse(url, row -> {
 			analyzerStats.updateFirstPost(row);
 			analyzerStats.updateLastPost(row);
 			analyzerStats.updateNumberOfTotalPosts(row);

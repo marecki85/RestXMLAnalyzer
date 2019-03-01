@@ -37,7 +37,8 @@ public class AnalyzeHandler extends DefaultHandler {
 					.title(attributes.getValue(Constants.TITLE))
 					.Tags(attributes.getValue(Constants.TAGS))
 					.AnswerCount(parseIfNotNull(attributes, Constants.ANSWER_COUNT))
-					.CommentCount(parseIfNotNull(attributes, Constants.COMMENT_COUNT)).build();
+					.CommentCount(parseIfNotNull(attributes, Constants.COMMENT_COUNT))
+					.build();
 		}
 	}
 

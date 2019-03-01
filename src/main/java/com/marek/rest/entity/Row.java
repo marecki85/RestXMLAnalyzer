@@ -10,7 +10,6 @@ import lombok.Setter;
 @Setter
 @Builder
 public class Row {
-
 	private String content;
 	private Integer id;
 	private Integer PostTypeId;
